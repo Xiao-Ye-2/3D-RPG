@@ -15,7 +15,7 @@ public enum EnemyState
 }
 
 [RequireComponent(typeof(NavMeshAgent), typeof(CharacterStats))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private NavMeshAgent agent;
     private EnemyState enemyState;
@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
     private bool isWalk;
     private bool isFollow;
     private bool isDead;
+    private bool playerDead = false;
     private readonly int chaseHash = Animator.StringToHash("Chase");
     private readonly int walkHash = Animator.StringToHash("Walk");
     private readonly int followHash = Animator.StringToHash("Follow");
@@ -71,12 +72,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.Instance.AddEndGameObserver(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.RemoveEndGameObserver(this);
+    }
+
     private void Update()
     {
         isDead = stats.currentHealth == 0;
-        SwitchStates();
-        SwitchAnimation();
-        lastAttackTime -= Time.deltaTime;
+        if (!playerDead)
+        {
+            SwitchStates();
+            SwitchAnimation();
+            lastAttackTime -= Time.deltaTime;
+        }
     }
 
     private void SwitchAnimation()
@@ -239,5 +253,14 @@ public class EnemyController : MonoBehaviour
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(stats, targetStats);
         }
+    }
+
+    public void EndNotify()
+    {
+        isChase = false;
+        isWalk = false;
+        attackTarget = null;
+        anim.SetBool("Win", true);
+        playerDead = true;
     }
 }

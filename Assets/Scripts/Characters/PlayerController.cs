@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         MouseManager.Instance.onMouseClickGround += MoveTo;
         MouseManager.Instance.onMouseClickEnemy += EventAttack;
+        GameManager.Instance.RegisterPlayer(stats);
     }
 
     // void OnDisable()
@@ -42,6 +43,10 @@ public class PlayerController : MonoBehaviour
         isDead = stats.currentHealth == 0;
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
+        if (isDead)
+        {
+            GameManager.Instance.NotifyEndGameObservers();
+        }
     }
 
     private void SwitchAnimation()

@@ -1,28 +1,17 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
-    public static MouseManager Instance;
     public event Action<Vector3> onMouseClickGround;
     public event Action<GameObject> onMouseClickEnemy;
     public Texture2D point, doorway, attack, target, arrow;
     private RaycastHit hitInfo;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    void Start()
-    {
-
+        base.Awake();
+        // DontDestroyOnLoad(this);
     }
 
     void Update()
