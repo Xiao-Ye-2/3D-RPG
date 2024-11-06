@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 1420034790043452193}
   - component: {fileID: 3835120928416267895}
   - component: {fileID: 8411202924177668163}
+  - component: {fileID: 7078392008721230675}
   m_Layer: 7
   m_Name: SlimePolyart
   m_TagString: Enemy
@@ -253,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4561528773523419743}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.90283054, z: -0, w: 0.42999643}
+  m_LocalRotation: {x: 0, y: -0.90282935, z: 0, w: 0.42999905}
   m_LocalPosition: {x: 13.519595, y: 0.1899972, z: 13.656792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -317,8 +318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e8b83d102e4164dbf1a4cbd2fe9b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 0
+  sightRadius: 8
   isGuard: 0
+  pauseInterval: 0
+  patrolRange: 8
 --- !u!135 &8411202924177668163
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -340,6 +343,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.6
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &7078392008721230675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561528773523419743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8803beb0a48a09e43848a09bc5953c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 3dcf4c91c4a0ac6418821d0a77904b2c, type: 2}
+  attackData: {fileID: 11400000, guid: 56950248aa2db3643921a0b9327442e7, type: 2}
+  isCritical: 0
 --- !u!1 &4657814404596606624
 GameObject:
   m_ObjectHideFlags: 0
