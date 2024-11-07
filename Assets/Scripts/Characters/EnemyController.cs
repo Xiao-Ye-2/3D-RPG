@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     public float pauseInterval;
     private float remainPauseTime;
     private float speed;
-    private GameObject attackTarget;
+    protected GameObject attackTarget;
     private float lastAttackTime;
     [Header("Patrol State")]
     public float patrolRange;
@@ -70,15 +70,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             enemyState = EnemyState.PATROL;
             GetNewWayPoint();
         }
-    }
 
-    private void OnEnable()
-    {
         GameManager.Instance.AddEndGameObserver(this);
     }
 
+    // private void OnEnable()
+    // {
+    //     GameManager.Instance.AddEndGameObserver(this);
+    // }
+
     private void OnDisable()
     {
+        if (!GameManager.IsInitialized) return;
         GameManager.Instance.RemoveEndGameObserver(this);
     }
 
@@ -188,7 +191,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 break;
             case EnemyState.DEAD:
                 coll.enabled = false;
-                agent.enabled = false;
+                agent.radius = 0;
                 Destroy(gameObject, 2f);
                 break;
         }
@@ -197,12 +200,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private void Attack()
     {
         transform.LookAt(attackTarget.transform);
-        if (TargetInRange(stats.attackData.attackRange))
+        // Compare which range is shorter and check that first
+        List<(float distance, string targetName)> attackDistances = new List<(float distance, string targetName)>();
+        attackDistances.Add((stats.attackData.attackRange, "Attack"));
+        attackDistances.Add((stats.attackData.skillRange, "Skill"));
+        attackDistances.Sort((x, y) => x.distance.CompareTo(y.distance));
+        foreach (var (distance, targetName) in attackDistances)
         {
-            anim.SetTrigger("Attack");
-        } else if (TargetInRange(stats.attackData.skillRange))
-        {
-            anim.SetTrigger("Skill");
+            if (TargetInRange(distance))
+            {
+                anim.SetTrigger(targetName);
+                break;
+            }
         }
     }
 

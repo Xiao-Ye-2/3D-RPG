@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8803beb0a48a09e43848a09bc5953c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: 87c322ad26897294bb43b3d88a1d6067, type: 2}
+  templateData: {fileID: 11400000, guid: 87c322ad26897294bb43b3d88a1d6067, type: 2}
   attackData: {fileID: 11400000, guid: 24530815e3672a54fbbf5a8357f3ad55, type: 2}
   isCritical: 0
 --- !u!1 &3952799888997143684
