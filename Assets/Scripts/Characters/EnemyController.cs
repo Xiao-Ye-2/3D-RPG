@@ -201,9 +201,11 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         transform.LookAt(attackTarget.transform);
         // Compare which range is shorter and check that first
-        List<(float distance, string targetName)> attackDistances = new List<(float distance, string targetName)>();
-        attackDistances.Add((stats.attackData.attackRange, "Attack"));
-        attackDistances.Add((stats.attackData.skillRange, "Skill"));
+        List<(float distance, string targetName)> attackDistances = new List<(float distance, string targetName)>
+        {
+            (stats.attackData.attackRange, "Attack"),
+            (stats.attackData.skillRange, "Skill")
+        };
         attackDistances.Sort((x, y) => x.distance.CompareTo(y.distance));
         foreach (var (distance, targetName) in attackDistances)
         {
@@ -257,7 +259,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private void Hit()
     {
-        if (attackTarget != null)
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(stats, targetStats);
