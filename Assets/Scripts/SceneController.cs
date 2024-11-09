@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -31,10 +32,12 @@ public class SceneController : Singleton<SceneController>
 
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
+        SaveManager.Instance.SavePlayerData();
         if (sceneName != "")
         {
             yield return SceneManager.LoadSceneAsync(sceneName);
             yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position, GetDestination(destinationTag).transform.rotation);
+            SaveManager.Instance.LoadPlayerData();
             yield break;
         }
         else {
@@ -57,5 +60,39 @@ public class SceneController : Singleton<SceneController>
                 return entrance;
         }
         return null;
+    }
+
+    public void TransitionToFirstLevel()
+    {
+        StartCoroutine(LoadLevel("SampleScene"));
+    }
+
+    IEnumerator LoadLevel(string Scene)
+    {
+        if (Scene != "")
+        {
+            yield return SceneManager.LoadSceneAsync(Scene);
+            Transform entrance = GameManager.Instance.GetEntrance();
+            yield return player = Instantiate(playerPrefab, entrance.position, entrance.rotation);
+            SaveManager.Instance.SavePlayerData();
+            yield break;
+        }
+    }
+
+    public void TransitionToStart()
+    {
+        StartCoroutine(LoadStart());
+    }
+
+    IEnumerator LoadStart()
+    {
+        if (SceneManager.GetActiveScene().name == "FirstScene") yield break;
+        yield return SceneManager.LoadSceneAsync("FirstScene");
+        yield break;
+    }
+
+    public void TransitionToLoadGame()
+    {
+        StartCoroutine(LoadLevel(SaveManager.Instance.SceneName));
     }
 }
