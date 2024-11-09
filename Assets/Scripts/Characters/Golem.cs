@@ -18,7 +18,7 @@ public class Golem : EnemyController
             attackTarget.GetComponent<NavMeshAgent>().isStopped = true;
             attackTarget.GetComponent<NavMeshAgent>().velocity = direction * knockBackForce;
             attackTarget.GetComponent<Animator>().SetTrigger("Dizzy");
-            targetStats.TakeDamage(stats, targetStats);
+            targetStats.TakeDamage(stats);
         }
     }
 

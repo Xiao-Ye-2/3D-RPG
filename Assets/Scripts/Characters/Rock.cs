@@ -55,14 +55,14 @@ public class Rock : MonoBehaviour
                     other.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
                     other.gameObject.GetComponent<NavMeshAgent>().velocity = direction * force;
                     other.gameObject.GetComponent<Animator>().SetTrigger("Dizzy");
-                    otherStats.TakeDamage(damage, otherStats);
+                    otherStats.TakeDamage(damage);
                     rockStates = RockStates.HitNothing;
                 }
                 break;
             case RockStates.HitEnemy:
                 if (other.gameObject.GetComponent<Golem>())
                 {
-                    otherStats.TakeDamage(damage, otherStats);
+                    otherStats.TakeDamage(damage);
                     Instantiate(breakEffect, transform.position, Quaternion.identity);
                     Destroy(gameObject);
                 }

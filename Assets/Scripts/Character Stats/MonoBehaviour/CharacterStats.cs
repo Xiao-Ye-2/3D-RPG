@@ -5,7 +5,8 @@ public class CharacterStats : MonoBehaviour
 {
     public event Action<int, int> UpdateHealthBarOnAttack;
     public CharacterData_SO templateData;
-    private CharacterData_SO characterData;
+    [HideInInspector]
+    public CharacterData_SO characterData;
     public AttackData_SO attackData;
 
     [HideInInspector]
@@ -46,31 +47,43 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     #region Combat
-    public void TakeDamage(CharacterStats attacker, CharacterStats defender)
+    public void TakeDamage(CharacterStats attacker)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - defender.currentDefence, 0);
+        int damage = Mathf.Max(attacker.CurrentDamage() - currentDefence, 0);
         currentHealth = Mathf.Max(currentHealth - damage, 0);
 
         if (attacker.isCritical)
         {
-            defender.GetComponent<Animator>().SetTrigger("Hit");
+            GetComponent<Animator>().SetTrigger("Hit");
         }
 
-        UIupdates();
-    }
-
-    public void TakeDamage(int damage, CharacterStats defender)
-    {
-        int currentDamage = Mathf.Max(damage - defender.currentDefence, 0);
-        currentHealth = Mathf.Max(currentHealth - currentDamage, 0);
-        defender.GetComponent<Animator>().SetTrigger("Hit");
-
-        UIupdates();
-    }
-
-    private void UIupdates()
-    {
         UpdateHealthBarOnAttack?.Invoke(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            attacker.characterData.UpdateExp(characterData.deathExp);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int currentDamage = Mathf.Max(damage - currentDefence, 0);
+        currentHealth = Mathf.Max(currentHealth - currentDamage, 0);
+        GetComponent<Animator>().SetTrigger("Hit");
+
+        UpdateHealthBarOnAttack?.Invoke(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            GameManager.Instance.playerStats.characterData.UpdateExp(characterData.deathExp);
+        }
+    }
+
+    private void DataUpdates()
+    {
+        // UpdateHealthBarOnAttack?.Invoke(currentHealth, maxHealth);
+        // if (currentHealth <= 0)
+        // {
+        //     attaccharacterData.UpdateExp(characterData.deathExp);
+        // }
     }
 
     private int CurrentDamage()

@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
-            targetStats.TakeDamage(stats, targetStats);
+            targetStats.TakeDamage(stats);
         }
     }
 }
