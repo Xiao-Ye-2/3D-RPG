@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public event Action<int, int> UpdateHealthBarOnAttack;
     public CharacterData_SO templateData;
     private CharacterData_SO characterData;
     public AttackData_SO attackData;
@@ -54,6 +55,22 @@ public class CharacterStats : MonoBehaviour
         {
             defender.GetComponent<Animator>().SetTrigger("Hit");
         }
+
+        UIupdates();
+    }
+
+    public void TakeDamage(int damage, CharacterStats defender)
+    {
+        int currentDamage = Mathf.Max(damage - defender.currentDefence, 0);
+        currentHealth = Mathf.Max(currentHealth - currentDamage, 0);
+        defender.GetComponent<Animator>().SetTrigger("Hit");
+
+        UIupdates();
+    }
+
+    private void UIupdates()
+    {
+        UpdateHealthBarOnAttack?.Invoke(currentHealth, maxHealth);
     }
 
     private int CurrentDamage()

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private CharacterStats stats;
     private GameObject attackTarget;
     private float lastAttackTime;
+    private float stopDistance;
     private bool isDead;
     private readonly int speedHash = Animator.StringToHash("Speed");
     private readonly int attackHash = Animator.StringToHash("Attack");
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         stats = GetComponent<CharacterStats>();
+        stopDistance = agent.stoppingDistance;
     }
 
     void Start()
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines();
         if (isDead) return;
         agent.isStopped = false;
+        agent.stoppingDistance = stopDistance;
         agent.SetDestination(position);
     }
 
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
+        agent.stoppingDistance = stats.attackData.attackRange;
         transform.LookAt(attackTarget.transform);
 
         while (Vector3.Distance(attackTarget.transform.position, transform.position) > stats.attackData.attackRange)
@@ -94,7 +98,17 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        if (attackTarget != null)
+        if (attackTarget == null) return;
+        if (attackTarget.CompareTag("Attackable"))
+        {
+            if (attackTarget.GetComponent<Rock>() && attackTarget.GetComponent<Rock>().rockStates == Rock.RockStates.HitNothing)
+            {
+                attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemy;
+                attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+                attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
+            }
+        }
+        else
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(stats, targetStats);

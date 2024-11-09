@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 3835120928416267895}
   - component: {fileID: 8411202924177668163}
   - component: {fileID: 7078392008721230675}
+  - component: {fileID: 4187984132051087279}
   m_Layer: 7
   m_Name: SlimePolyart
   m_TagString: Enemy
@@ -261,6 +262,7 @@ Transform:
   m_Children:
   - {fileID: 8607695293165344718}
   - {fileID: 7302335735728785427}
+  - {fileID: 2656298072812327726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -129.065, z: 0}
 --- !u!95 &1778928045271795746
@@ -358,6 +360,22 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: 3dcf4c91c4a0ac6418821d0a77904b2c, type: 2}
   attackData: {fileID: 11400000, guid: 56950248aa2db3643921a0b9327442e7, type: 2}
   isCritical: 0
+--- !u!114 &4187984132051087279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561528773523419743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c86effe06d8a54ca102b661d9696e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 1130855945883996156, guid: 1756818b61fa25f4ead48aad2f82b557, type: 3}
+  barPoint: {fileID: 2656298072812327726}
+  alwaysVisible: 1
+  visibleTime: 0
 --- !u!1 &4657814404596606624
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +439,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 10160811731679151}
   m_LocalEulerAnglesHint: {x: 72.20068, y: -90, z: 180}
+--- !u!1 &7665663379292030565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2656298072812327726}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2656298072812327726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665663379292030565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4146725573304974612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8563875443769677419
 GameObject:
   m_ObjectHideFlags: 0

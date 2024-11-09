@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 7599317846823676788}
   - component: {fileID: 2809715783676931270}
   - component: {fileID: 4425762549634209477}
+  - component: {fileID: 5638233573445186735}
   m_Layer: 6
   m_Name: TurtleShell
   m_TagString: Enemy
@@ -853,13 +854,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6409002709198153794}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.8162248, z: -0, w: 0.57773453}
+  m_LocalRotation: {x: 0, y: -0.8162233, z: 0, w: 0.5777366}
   m_LocalPosition: {x: 11.02, y: 0, z: 9.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4286517915430544961}
   - {fileID: 4822524690808013438}
+  - {fileID: 4412743391311594901}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -109.417, z: 0}
 --- !u!95 &8599471945585252156
@@ -957,6 +959,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.7
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &5638233573445186735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409002709198153794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c86effe06d8a54ca102b661d9696e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 1130855945883996156, guid: 1756818b61fa25f4ead48aad2f82b557, type: 3}
+  barPoint: {fileID: 4412743391311594901}
+  alwaysVisible: 1
+  visibleTime: 0
 --- !u!1 &6696942527256479208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1068,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6462201776942370061}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6897206960031778987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4412743391311594901}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4412743391311594901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897206960031778987}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3821073831534268891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7388914469866619626
 GameObject:

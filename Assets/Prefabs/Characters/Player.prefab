@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 8746782355398311971}
   - component: {fileID: 8950216800226295943}
   - component: {fileID: 3973411708439517857}
+  - component: {fileID: 8743539747203605785}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -844,6 +845,33 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: 87c322ad26897294bb43b3d88a1d6067, type: 2}
   attackData: {fileID: 11400000, guid: 24530815e3672a54fbbf5a8357f3ad55, type: 2}
   isCritical: 0
+--- !u!54 &8743539747203605785
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869117671730236267}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3952799888997143684
 GameObject:
   m_ObjectHideFlags: 0

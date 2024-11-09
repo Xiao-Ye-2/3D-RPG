@@ -469,6 +469,10 @@ GameObject:
   - component: {fileID: 3171131193161296607}
   - component: {fileID: 4517694973646959206}
   - component: {fileID: 3967009521243569864}
+  - component: {fileID: 5121046798490753878}
+  - component: {fileID: 4748412926056547482}
+  - component: {fileID: 2577259204459059026}
+  - component: {fileID: 2352987881683104832}
   m_Layer: 7
   m_Name: Golem
   m_TagString: Enemy
@@ -484,13 +488,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4519940154703043262}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.8495534, z: -0, w: 0.5275027}
+  m_LocalRotation: {x: 0, y: 0.84955215, z: 0, w: 0.5275046}
   m_LocalPosition: {x: -14.588505, y: 0.42379633, z: 16.590107}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1350831407738016867}
   - {fileID: 8619835590416601736}
+  - {fileID: 2927302636468369956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 116.326, z: 0}
 --- !u!95 &4517694973646959206
@@ -503,7 +508,7 @@ Animator:
   m_GameObject: {fileID: 4519940154703043262}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0f2c5202b918687408ac5bc7429a03ea, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 90347a8e1374f4d4ab10e9a4002f8b91, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -535,6 +540,78 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 4, z: 3}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!195 &5121046798490753878
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519940154703043262}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.4
+  m_Speed: 2
+  m_Acceleration: 50
+  avoidancePriority: 50
+  m_AngularSpeed: 500
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 4
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4748412926056547482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519940154703043262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8803beb0a48a09e43848a09bc5953c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateData: {fileID: 11400000, guid: ac0c8cb9637918b4d8d29fd8f62bd8cd, type: 2}
+  attackData: {fileID: 11400000, guid: 28ba854faf3e98a459b1a9c0c22f8cc1, type: 2}
+  isCritical: 0
+--- !u!114 &2577259204459059026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519940154703043262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ff466b78ff9e84bbebd4ca41cca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 10
+  isGuard: 1
+  pauseInterval: 3
+  patrolRange: 0
+  knockBackForce: 25
+  rockPrefab: {fileID: 2211135148615682323, guid: d08b51a450d12a64497d0a13669cd606, type: 3}
+  handPos: {fileID: 2328540012875303227}
+--- !u!114 &2352987881683104832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519940154703043262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c86effe06d8a54ca102b661d9696e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 1130855945883996156, guid: 1756818b61fa25f4ead48aad2f82b557, type: 3}
+  barPoint: {fileID: 2927302636468369956}
+  alwaysVisible: 1
+  visibleTime: 0
 --- !u!1 &5059544787119487315
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,4 +897,35 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3059556435515534254}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9023112738806836665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2927302636468369956}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2927302636468369956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9023112738806836665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3171131193161296607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

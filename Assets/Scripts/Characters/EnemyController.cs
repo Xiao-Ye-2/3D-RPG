@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private EnemyState enemyState;
     private Animator anim;
     private Collider coll;
-    private CharacterStats stats;
+    protected CharacterStats stats;
     [Header("Basic Settings")]
     public float sightRadius;
     public bool isGuard;
