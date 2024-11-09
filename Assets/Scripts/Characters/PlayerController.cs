@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private readonly int deathHash = Animator.StringToHash("Death");
 
 
-    void Awake()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -28,17 +28,23 @@ public class PlayerController : MonoBehaviour
         stopDistance = agent.stoppingDistance;
     }
 
-    void Start()
+    private void Start()
     {
-        MouseManager.Instance.onMouseClickGround += MoveTo;
-        MouseManager.Instance.onMouseClickEnemy += EventAttack;
         GameManager.Instance.RegisterPlayer(stats);
     }
 
-    // void OnDisable()
-    // {
-    //     MouseManager.Instance.onMouseClickGround -= MoveTo;
-    // }
+    private void OnEnable()
+    {
+        MouseManager.Instance.onMouseClickGround += MoveTo;
+        MouseManager.Instance.onMouseClickEnemy += EventAttack;
+    }
+
+    private void OnDisable()
+    {
+        if (MouseManager.Instance == null) return;
+        MouseManager.Instance.onMouseClickGround -= MoveTo;
+        MouseManager.Instance.onMouseClickEnemy -= EventAttack;
+    }
 
     private void Update()
     {
